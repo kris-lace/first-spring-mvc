@@ -5,15 +5,25 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--
+        This tells spring where to look for annotations in the project.
+        It needs these this config load properly
+
+        e.g. what are the controllers? @Controllers or @RequestMapping etc
+    -->
     <context:component-scan base-package="com.springapp.mvc"/>
 
+    <!--
+        This maps the views based on their name.
+
+        e.g. a view named hello will be sent to /WEB-INF/jps/hello.jsp
+    -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-
-    <!-- <import resource="classpath: core-library-beans.xml"/> -->
-
+    <!-- Import beans for general spring DI -->
+    <import resource="classpath*:/com/springapp/mvc/config/core-library-beans.xml"/>
 
 </beans>

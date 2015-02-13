@@ -2,8 +2,8 @@ package com.springapp.mvc.service;
 
 import com.springapp.mvc.domain.User;
 import com.springapp.mvc.repository.Repository;
-import com.springapp.mvc.domain.Book;
 import com.springapp.mvc.domain.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 /**
@@ -11,21 +11,23 @@ import org.springframework.beans.factory.annotation.Required;
  */
 public class LibraryServiceImpl implements LibraryService {
 
+    @Autowired
     Repository library;
 
     @Override
     public Order orderBook(Order order) {
 
         if (validateOrder(order)) {
-            order.setBook(library.findBook(order.getBook().getTitle()));
+            order.setBook(library.findBook(order.getBook().getTitle()).getTitle());
 
             if (order.getBook() != null) {
-                order.setStatus("successfully ordered " + order.getBook().getTitle());
+                order.setStatus("Successfully ordered " + order.getBook().getTitle());
             } else {
-                order.setStatus("book not found");
+                order.setStatus("Book not found");
             }
 
             return order;
+
         } else {
             return order;
         }
@@ -33,8 +35,14 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public void returnBook(Book book) {
-        library.returnBook(book);
+    public Order returnBook(Order order) {
+        if (library.returnBook(order.getBook())) {
+            order.setStatus(order.getBook().getTitle() + " returned ");
+            return order;
+        } else {
+            order.setStatus("Problem returning " + order.getBook().getTitle());
+            return order;
+        }
     }
 
     private boolean validateOrder(Order order) {
@@ -43,7 +51,7 @@ public class LibraryServiceImpl implements LibraryService {
             order.setStatus("You can't order a new book until you return your current one.");
             return false;
         } else {
-            order.setStatus("Order valdiated");
+            order.setStatus("Order validated");
             return true;
         }
     }

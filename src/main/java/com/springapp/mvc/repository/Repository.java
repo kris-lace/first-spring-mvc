@@ -9,6 +9,6 @@ public interface Repository {
 
     public Book findBook(String title);
 
-    public void returnBook(Book book);
+    public boolean returnBook(Book book);
 
 }

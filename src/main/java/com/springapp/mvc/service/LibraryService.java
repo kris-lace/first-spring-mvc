@@ -11,7 +11,7 @@ public interface LibraryService {
 
     public Order orderBook(Order order);
 
-    public void returnBook(Book book);
+    public Order returnBook(Order order);
 
     public User newUser(String name);
 

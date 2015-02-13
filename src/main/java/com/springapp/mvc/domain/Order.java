@@ -13,16 +13,16 @@ public class Order {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(String user) {
+        this.user = new User(user);
     }
 
     public Book getBook() {
         return book;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBook(String book) {
+        this.book = new Book(book);
     }
 
     public String getStatus() {

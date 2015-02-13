@@ -1,6 +1,7 @@
 package com.springapp.mvc.repository;
 
 import com.springapp.mvc.domain.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public class MemoryLibrary implements Repository {
 
+    @Autowired
     private List<Book> books;
 
     @Override
@@ -29,8 +31,8 @@ public class MemoryLibrary implements Repository {
     }
 
     @Override
-    public void returnBook(Book book) {
-        books.add(book);
+    public boolean returnBook(Book book) {
+        return books.add(book);
     }
 
     public List<Book> getBooks() {
