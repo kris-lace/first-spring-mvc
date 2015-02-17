@@ -12,13 +12,14 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = "classpath:mvc-dispatcher-servlet.xml")
+@ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
 public class AppTests {
     private MockMvc mockMvc;
 
@@ -35,7 +36,7 @@ public class AppTests {
 
     @Test
     public void simple() throws Exception {
-        mockMvc.perform(get(URL + "/"))
+        mockMvc.perform(get("/hello"))
                .andExpect(status().isOk())
                .andExpect(view().name("hello"));
     }
@@ -46,9 +47,8 @@ public class AppTests {
         // With a book that's available
         // It should successfully order the book
 
-        mockMvc.perform(get(URL + "/library/order/kris/BookA"))
-               .andExpect(status().isOk())
-               .andExpect(view().name("hello")); // TODO
+        mockMvc.perform(get("/order/kris/BookA"))
+               .andExpect(status().isOk());
 
     }
 

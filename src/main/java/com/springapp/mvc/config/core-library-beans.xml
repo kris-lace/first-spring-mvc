@@ -8,6 +8,10 @@
 
     <import resource="book-beans.xml"/>
 
+    <!--<bean id="controller" class="com.springapp.mvc.controller.HelloController">
+        <property name="service" value="service"/>
+    </bean>>-->
+
     <!--                       Library Service                          -->
     <bean id="service" class="com.springapp.mvc.service.LibraryServiceImpl">
         <property name="library" value="repository"/>
