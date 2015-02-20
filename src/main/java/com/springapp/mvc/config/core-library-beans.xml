@@ -8,26 +8,21 @@
 
     <import resource="book-beans.xml"/>
 
-    <!--<bean id="controller" class="com.springapp.mvc.controller.HelloController">
-        <property name="service" value="service"/>
-    </bean>>-->
-
-    <!--                       Library Service                          -->
-    <bean id="service" class="com.springapp.mvc.service.LibraryServiceImpl">
-        <property name="library" value="repository"/>
+                <!--  Library Service -->
+    <bean id="libraryService" class="com.springapp.mvc.service.LibraryServiceImpl">
+        <property name="library" ref="repository"/>
     </bean>
 
-    <!--                       Repository Storage                       -->
+                <!--  Repository Storage -->
     <bean id="repository" class="com.springapp.mvc.repository.MemoryLibrary">
         <property name="books">
             <list>
-                <value>BookA</value>
-                <value>BookB</value>
-                <value>BookC</value>
-                <value>BookD</value>
+                <ref bean="BookA"/>
+                <ref bean="BookB"/>
+                <ref bean="BookC"/>
+                <ref bean="BookD"/>
             </list>
         </property>
     </bean>
-
 
 </beans>

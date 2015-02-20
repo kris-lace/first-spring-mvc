@@ -5,13 +5,13 @@ import com.springapp.mvc.repository.Repository;
 import com.springapp.mvc.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by kristopherstevens on 12/02/15.
  */
 public class LibraryServiceImpl implements LibraryService {
 
-    @Autowired
     Repository library;
 
     @Override

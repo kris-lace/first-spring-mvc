@@ -3,6 +3,7 @@ package com.springapp.mvc.repository;
 import com.springapp.mvc.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.List;
  */
 public class MemoryLibrary implements Repository {
 
-    @Autowired
     private List<Book> books;
 
     @Override
