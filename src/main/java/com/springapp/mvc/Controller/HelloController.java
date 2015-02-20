@@ -2,7 +2,6 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Order;
 import com.springapp.mvc.service.LibraryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class HelloController {
 
-	@Autowired
-	private LibraryService service;
+	private LibraryService libraryService;
 
 	@RequestMapping(value = "hello", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
@@ -34,7 +32,7 @@ public class HelloController {
 		order.setBook(title);
 		order.setUser(username);
 
-		order = service.orderBook(order);
+		order = libraryService.orderBook(order);
 
 		console.concat("\n" + order.getStatus());
 		return console;
@@ -51,15 +49,14 @@ public class HelloController {
 		order.setBook(title);
 		order.setUser(username);
 
-		order = service.returnBook(order);
+		order = libraryService.returnBook(order);
 
 		console.concat("\n" + order.getStatus());
 		return console;
-
 	}
 
 	public void setService(LibraryService service) {
-		this.service = service;
+		this.libraryService = service;
 	}
 
 }
