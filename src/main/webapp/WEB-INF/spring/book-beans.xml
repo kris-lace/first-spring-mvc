@@ -12,19 +12,19 @@
      -->
 
     <bean id="BookA" class="com.springapp.mvc.domain.Book">
-        <property name="title" value="Book A"/>
+        <property name="title" value="Book_A"/>
     </bean>
 
     <bean id="BookB" class="com.springapp.mvc.domain.Book">
-        <property name="title" value="Book B"/>
+        <property name="title" value="Book_B"/>
     </bean>
 
     <bean id="BookC" class="com.springapp.mvc.domain.Book">
-        <property name="title" value="Book C"/>
+        <property name="title" value="Book_C"/>
     </bean>
 
     <bean id="BookD" class="com.springapp.mvc.domain.Book">
-        <property name="title" value="Book D"/>
+        <property name="title" value="Book_D"/>
     </bean>
 
 </beans>

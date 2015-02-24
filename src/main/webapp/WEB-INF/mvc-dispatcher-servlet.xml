@@ -1,49 +1,18 @@
-<!--<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">-->
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
-                    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
                     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
     <!--
         This tells spring where to look for annotations in the project.
         It needs these this config load properly
-
          e.g. what are the controllers? @Controllers or @RequestMapping etc
          <context:component-scan base-package="com.springapp.mvc"/>
     -->
-    <context:component-scan base-package="com.springapp.mvc"/>
-
-    <!--
-        Enables many annotations and searches
-
-         e.g. @Controller annotated methods etc..
-         <context:annotation-config />
-    -->
-
-
-    <!--
-        DispatcherServlet Context: defines this servlets request-processing infrastructure
-
-         e.g. allows for mapping the DispatcherServlet to "/" (all extensions etc)
-    -->
-
-    <!--
-    TODO
-    <mvc:default-servlet-handler/>
-    <mvc:annotation-driven/>
-    -->
-    <mvc:annotation-driven/>
-
+    <context:component-scan base-package="com.springapp.mvc.controller"/> <!-- Don't pick up DI stuff -->
 
     <!--
         This maps the views based on their name.
@@ -54,9 +23,7 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <!-- Import beans for general spring DI -->
-    <import resource="classpath*:/com/springapp/mvc/config/core-library-beans.xml"/>
 
-
+    <import resource="spring/application-context.xml"/>
 
 </beans>

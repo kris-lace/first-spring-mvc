@@ -12,6 +12,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -46,8 +47,9 @@ public class AppTests {
         // With a book that's available
         // It should successfully order the book
 
-        mockMvc.perform(get("/order/kris/BookA"))
-               .andExpect(status().isOk());
+        mockMvc.perform(get("/order/kris/Book_A"))
+               .andExpect(status().isOk())
+               .andExpect(content().string(".*suc.*"));
 
     }
 
@@ -59,7 +61,8 @@ public class AppTests {
 
         mockMvc.perform(get(URL + "/library/order/kris/BookX"))
                .andExpect(status().isOk())
-               .andExpect(view().name("hello")); // TODO
+               .andExpect(view().name("hello"))
+               .andExpect(content().string(".*suc.*"));
 
     }
 

@@ -1,11 +1,13 @@
 package com.springapp.mvc.service;
 
+import com.springapp.mvc.domain.Book;
 import com.springapp.mvc.domain.User;
 import com.springapp.mvc.repository.Repository;
 import com.springapp.mvc.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by kristopherstevens on 12/02/15.
@@ -18,7 +20,8 @@ public class LibraryServiceImpl implements LibraryService {
     public Order orderBook(Order order) {
 
         if (validateOrder(order)) {
-            order.setBook(library.findBook(order.getBook().getTitle()).getTitle());
+
+            order.setBook(library.findBook(order.getBookRequest()));
 
             if (order.getBook() != null) {
                 order.setStatus("Successfully ordered " + order.getBook().getTitle());
@@ -47,7 +50,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     private boolean validateOrder(Order order) {
 
-        if (order.getUser().getBooks().size() > 1) {
+        if (order.getUser().getBooks() != null && order.getUser().getBooks().size() > 1) {
             order.setStatus("You can't order a new book until you return your current one.");
             return false;
         } else {
@@ -61,7 +64,7 @@ public class LibraryServiceImpl implements LibraryService {
         return new User(name);
     }
 
-    @Required
+
     public void setLibrary(Repository library) {
         this.library = library;
     }

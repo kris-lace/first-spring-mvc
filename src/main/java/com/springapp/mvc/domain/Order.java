@@ -8,6 +8,15 @@ public class Order {
     private User user;
     private Book book;
     private String status;
+    private String bookRequest;
+
+    public String getBookRequest() {
+        return bookRequest;
+    }
+
+    public void setBookRequest(String bookRequest) {
+        this.bookRequest = bookRequest;
+    }
 
     public User getUser() {
         return user;
@@ -21,8 +30,8 @@ public class Order {
         return book;
     }
 
-    public void setBook(String book) {
-        this.book = new Book(book);
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getStatus() {

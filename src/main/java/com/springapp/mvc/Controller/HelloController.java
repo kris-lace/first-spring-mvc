@@ -2,6 +2,8 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Order;
 import com.springapp.mvc.service.LibraryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class HelloController {
 
+	@Autowired
 	private LibraryService libraryService;
 
 	@RequestMapping(value = "hello", method = RequestMethod.GET)
@@ -29,12 +32,12 @@ public class HelloController {
 		String console = username + " requests " + title;
 
 		Order order = new Order();
-		order.setBook(title);
+		order.setBookRequest(title);
 		order.setUser(username);
 
 		order = libraryService.orderBook(order);
 
-		console.concat("\n" + order.getStatus());
+		console = console.concat("\n" + order.getStatus());
 		return console;
 	}
 
@@ -46,12 +49,12 @@ public class HelloController {
 		String console = username + " requests " + title;
 
 		Order order = new Order();
-		order.setBook(title);
+		order.setBookRequest(title);
 		order.setUser(username);
 
 		order = libraryService.returnBook(order);
 
-		console.concat("\n" + order.getStatus());
+		console = console.concat("\n" + order.getStatus());
 		return console;
 	}
 

@@ -5,16 +5,10 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
     <import resource="book-beans.xml"/>
 
-                <!--  Library Service -->
-    <bean id="libraryService" class="com.springapp.mvc.service.LibraryServiceImpl">
-        <property name="library" ref="repository"/>
-    </bean>
-
                 <!--  Repository Storage -->
-    <bean id="repository" class="com.springapp.mvc.repository.MemoryLibrary">
+    <bean id="repository" class="com.springapp.mvc.repository.RepositoryMemImpl">
         <property name="books">
             <list>
                 <ref bean="BookA"/>
@@ -23,6 +17,11 @@
                 <ref bean="BookD"/>
             </list>
         </property>
+    </bean>
+
+                <!--  Library Service -->
+    <bean id="libraryService" class="com.springapp.mvc.service.LibraryServiceImpl">
+        <property name="library" ref="repository"/>
     </bean>
 
 </beans>
