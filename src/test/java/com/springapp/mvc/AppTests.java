@@ -21,13 +21,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @WebAppConfiguration
 @ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
 public class AppTests {
+
     private MockMvc mockMvc;
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     protected WebApplicationContext wac;
-
-    private String URL = "/library/order";
 
     @Before
     public void setup() {
@@ -43,63 +42,59 @@ public class AppTests {
 
     @Test
     public void testThatUserCanOrderABookThatExists() throws Exception {
-        // When A User makes an order
-        // With a book that's available
-        // It should successfully order the book
+        /*  When A User makes an order
+            With a book that's available
+            It should successfully order the book */
 
         mockMvc.perform(get("/order/kris/Book_A"))
                .andExpect(status().isOk())
-               .andExpect(content().string(".*suc.*"));
-
+               .andExpect(content().string("kris requests Book_A\n" + "Successfully ordered Book_A"));
     }
 
     @Test
     public void testThatUserCantOrderABookThatDoesNotExist() throws Exception {
-        // When A User makes an order
-        // With a book that's not available
-        // It should respond with appropriate message order the book
+        /*  When A User makes an order
+            With a book that's not available
+            It should respond with appropriate message order the book */
 
-        mockMvc.perform(get(URL + "/library/order/kris/BookX"))
+        mockMvc.perform(get("/order/kris/Book_X"))
                .andExpect(status().isOk())
-               .andExpect(view().name("hello"))
-               .andExpect(content().string(".*suc.*"));
-
+               .andExpect(content().string("kris requests Book_X\n" + "Book not found"));
     }
 
-    @Test
+    @Deprecated // TODO
     public void testThatUserCantOrderABookWhenTheyHaveABookAlready() throws Exception {
-        // When A User makes an order
-        // With a book that's available - but they have a book already
-        // It should respond with appropriate error message
+        /*  When A User makes an order
+            With a book that's available - but they have a book already
+            It should respond with appropriate error message */
 
-        mockMvc.perform(get(URL + "/library/order/kris/BookA")) // TODO
+        mockMvc.perform(get("/order/kris/Book_A"))
+               .andExpect(status().isOk());
+
+        mockMvc.perform(get("/order/kris/Book_B"))
                .andExpect(status().isOk())
-               .andExpect(view().name("hello")); // TODO
-
+               .andExpect(content().string("kris requests Book_X\n" + "Book not found"));
     }
 
-    @Test
+    @Deprecated // TODO
     public void testThatUsersBooksEmptyWhenReturned() throws Exception {
-        // When A User returns a book
-        // with a valid book
-        // It should not be in their collection any more
+        /*  When A User returns a book
+            with a valid book
+            It should not be in their collection any more */
 
-        mockMvc.perform(delete(URL + "/library/order/kris/BookB"))
+        mockMvc.perform(delete("/order/kris/Book_B"))
                .andExpect(status().isOk())
-               .andExpect(view().name("hello")); // TODO
-
+               .andExpect(content().string("kris requests Book_X\n" + "Book not found"));
     }
 
-    @Test
+    @Deprecated // TODO
     public void testThatLibraryBooksAreAvailableWhenReturned() throws Exception {
-        // When A User returns a book
-        // with a valid book
-        // It should now be available to order
+        /*  When A User returns a book
+            with a valid book
+            It should now be available to order */
 
-        mockMvc.perform(delete(URL + "/library/order/kris/BookA"))
+        mockMvc.perform(delete("/order/kris/BookA"))
                .andExpect(status().isOk())
-               .andExpect(view().name("hello")); // TODO
-
+               .andExpect(view().name("hello"));
     }
-
 }
